@@ -1,8 +1,10 @@
 import { PrismaClient } from "@prisma/client";
+import { hash } from "bcrypt";
 
 const prisma = new PrismaClient();
 
 async function main() {
+    const defaultPassword = process.env.LUNA_PASSWORD || 'luna1234';
     await prisma.user.deleteMany();
 
     const users = await prisma.user.createMany({
@@ -11,7 +13,8 @@ async function main() {
                 id: '1',
                 name: 'Luna',
                 email: 'luna@anjotech.com',
-                password: '$2y$10$LaI3PYSEP1KsCd.Tgm4E9eHplhLDRoOr3wpfdJAqykJU7RAZ7iCS6',
+                password: await hash(defaultPassword, 10),
+                updatedAt: new Date(),
                 createdAt: new Date(),
             }
         ]

@@ -12,17 +12,18 @@ interface CreateUserRequest {
 
 @Injectable()
 export class CreateUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+  ) {}
 
-  async execute({ email, name, password }: CreateUserRequest) {
-    const userAlreadyExist = await this.userRepository.findByEmail(email);
+  async execute(data: CreateUserRequest) {
+    const userAlreadyExist = await this.userRepository.findByEmail(data.email);
 
     if (userAlreadyExist) throw new UserWithSameEmailException();
 
     const user = new User({
-      email,
-      name,
-      password: await hash(password, 10),
+      ...data,
+      password: await hash(data.password, 10),
     });
 
     await this.userRepository.create(user);
