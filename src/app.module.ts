@@ -4,9 +4,10 @@ import { DatabaseModule } from './infra/database/database.module';
 import { AuthModule } from './infra/http/modules/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './infra/http/modules/auth/guards/jwtAuth.guard';
+import { OrganizationModule } from './infra/http/modules/organization/organization.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule, AuthModule],
+  imports: [DatabaseModule, UserModule, AuthModule, OrganizationModule],
   controllers: [],
   providers: [
     {

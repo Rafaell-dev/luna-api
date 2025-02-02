@@ -1,21 +1,24 @@
 import { randomUUID } from 'crypto';
 import { Replace } from 'src/utils/replace';
 
-interface UserSchema {
+export interface UserSchema {
   email: string;
   password: string;
   name: string;
+  organizationId: string;
   createdAt: Date;
+  updatedAt: Date;
 }
 
 export class User {
   private props: UserSchema;
   private _id: string;
 
-  constructor(props: Replace<UserSchema, { createdAt?: Date }>, id?: string) {
+  constructor(props: Replace<UserSchema, { createdAt?: Date, updatedAt?: Date | null }>, id?: string) {
     this.props = {
       ...props,
       createdAt: props.createdAt || new Date(),
+      updatedAt: props.updatedAt || new Date(),
     };
     this._id = id || randomUUID();
   }
@@ -48,7 +51,23 @@ export class User {
     this.props.name = name;
   }
 
+  get organizationId(): string {
+    return this.props.organizationId;
+  }
+
+  set organizationId(organizationId: string) {
+    this.props.organizationId = organizationId;
+  }
+
   get createdAt(): Date {
     return this.props.createdAt;
+  }
+
+  get updatedAt(): Date {
+    return this.props.updatedAt;
+  }
+  
+  set updatedAt(updatedAt: Date) {
+    this.props.updatedAt = updatedAt;
   }
 }
