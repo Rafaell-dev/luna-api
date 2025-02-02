@@ -3,9 +3,9 @@ import { AppException } from "./appException";
 import { HttpStatus } from "@nestjs/common";
 
 export class NotFoundException extends AppException {
-  constructor(message = ErrorMessage.NOT_FOUND) {
+  constructor(message?: ErrorMessage) {
     super({
-      message,
+      message: ErrorMessage.NOT_FOUND,
       status: HttpStatus.NOT_FOUND,
     });
   }

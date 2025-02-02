@@ -5,6 +5,7 @@ export interface UserSchema {
   email: string;
   password: string;
   name: string;
+  organizationId: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -13,7 +14,7 @@ export class User {
   private props: UserSchema;
   private _id: string;
 
-  constructor(props: Replace<UserSchema, { createdAt?: Date, updatedAt?: Date }>, id?: string) {
+  constructor(props: Replace<UserSchema, { createdAt?: Date, updatedAt?: Date | null }>, id?: string) {
     this.props = {
       ...props,
       createdAt: props.createdAt || new Date(),
@@ -48,6 +49,14 @@ export class User {
 
   set name(name: string) {
     this.props.name = name;
+  }
+
+  get organizationId(): string {
+    return this.props.organizationId;
+  }
+
+  set organizationId(organizationId: string) {
+    this.props.organizationId = organizationId;
   }
 
   get createdAt(): Date {

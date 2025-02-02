@@ -1,4 +1,4 @@
-import { User } from '../../../../modules/user/entities/User';
+import { User } from 'src/modules/user/entities/User';
 import { User as UserRaw } from '@prisma/client';
 
 export class PrismaUserMapper {
@@ -6,10 +6,11 @@ export class PrismaUserMapper {
     return {
       id: user.id,
       email: user.email,
-      name: user.name,
-      password: user.password,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
+      nome: user.name,
+      senha: user.password,
+      dataCriacao: user.createdAt,
+      dataAtualizacao: user.updatedAt,
+      organizacaoId: user.organizationId,
     };
   }
 
@@ -17,10 +18,11 @@ export class PrismaUserMapper {
     return {
       id: user.id,
       email: user.email,
-      name: user.name,
-      password: user.password,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
+      nome: user.name,
+      senha: user.password,
+      dataCriacao: user.createdAt,
+      dataAtualizacao: user.updatedAt,
+      organizacaoId: user.organizationId,
     };
   }
 
@@ -28,10 +30,11 @@ export class PrismaUserMapper {
     return new User(
       {
         email: user.email,
-        name: user.name,
-        password: user.password,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
+        name: user.nome,
+        password: user.senha,
+        createdAt: user.dataCriacao,
+        updatedAt: user.dataAtualizacao,
+        organizationId: user.organizacaoId,
       },
       user.id,
     );

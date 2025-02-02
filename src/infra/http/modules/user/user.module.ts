@@ -5,7 +5,6 @@ import { DatabaseModule } from 'src/infra/database/database.module';
 import { UpdateUserByIdUseCase } from 'src/modules/user/useCases/updateUserUseCase/updateUserByIdUseCase';
 import { FindByIdUserUseCase } from 'src/modules/user/useCases/findByIdUserUseCase/findByIdUserUseCase';
 import { FindByEmailUserUseCase } from 'src/modules/user/useCases/findByEmailUserUseCase/findByEmailUserUseCase';
-import { PrismaUserRepository } from 'src/infra/database/prisma/repositories/PrismaUserRepository';
 
 @Module({
   imports: [DatabaseModule],

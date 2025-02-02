@@ -12,6 +12,7 @@ interface UpdateUserRequest {
     email?: string;
     name?: string;
     password?: string;
+    organizationId?: string;
   };
 }
 

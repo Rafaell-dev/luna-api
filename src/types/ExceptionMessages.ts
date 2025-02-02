@@ -4,4 +4,5 @@ export enum ErrorMessage {
     DATA_IS_REQUIRED = 'DATA_IS_REQUIRED',
     BAD_REQUEST = 'BAD_REQUEST',
     NOT_FOUND = 'NOT_FOUND',
+    CONFLICT = 'CONFLICT',
 }

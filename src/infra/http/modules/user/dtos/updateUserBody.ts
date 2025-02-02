@@ -21,4 +21,9 @@ export class UpdateUserRequest {
   @MinLengthCustom(6)
   @IsOptional()
   password?: string;
+
+  @IsStringCustom()
+  @IsNotEmptyCustom()
+  @IsOptional()
+  organizationId?: string;
 }

@@ -8,6 +8,7 @@ interface CreateUserRequest {
   email: string;
   name: string;
   password: string;
+  organizationId: string;
 }
 
 @Injectable()

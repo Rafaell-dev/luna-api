@@ -16,11 +16,9 @@ describe('Create User', () => {
   it('Should be able to create user', async () => {
     expect(userRepositoryInMemory.users).toEqual([]);
 
-    const user = await createUserUseCase.execute({
-      email: 'email@email.com',
-      name: 'Vitor',
-      password: '123123',
-    });
+    const newUser = makeUser({});
+
+    const user = await createUserUseCase.execute(newUser);
 
     expect(userRepositoryInMemory.users).toEqual([user]);
   });
@@ -28,11 +26,9 @@ describe('Create User', () => {
   it('Should be able to create user with password encrypted', async () => {
     const userPasswordWithoutEncryption = '123123';
 
-    const user = await createUserUseCase.execute({
-      email: 'email@email.com',
-      name: 'Vitor',
-      password: userPasswordWithoutEncryption,
-    });
+    const newUser = makeUser({});
+
+    const user = await createUserUseCase.execute(newUser);
 
     const userHasPasswordEncrypted = await compare(
       userPasswordWithoutEncryption,
@@ -49,11 +45,7 @@ describe('Create User', () => {
 
     expect(
       async () =>
-        await createUserUseCase.execute({
-          email: user.email,
-          name: 'vitor',
-          password: '123123',
-        }),
+        await createUserUseCase.execute(user),
     ).rejects.toThrow(UserWithSameEmailException);
   });
 });

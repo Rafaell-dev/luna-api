@@ -16,12 +16,13 @@ export class UserController {
 
   @Post('cadastrar')
   async createPost(@Body() body: CreateUserBody) {
-    const { email, name, password } = body;
+    const { email, name, password, organizationId } = body;
 
     const user = await this.createUserUseCase.execute({
       email,
       name,
       password,
+      organizationId,
     });
 
     return UserViewModel.toHttp(user);
@@ -48,6 +49,8 @@ export class UserController {
   ) {
     const updatedUser = await this.updateUserByIdUseCase.execute({ id: userId, data: body });
 
-    return updatedUser;
+    if(updatedUser){
+      return UserViewModel.toHttp(updatedUser);
+    }
   }
 }
